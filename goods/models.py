@@ -14,6 +14,10 @@ class GoodsModel(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def short_title(self):
+        return self.name[:10]
+
     class Meta:
         db_table = 'app_goods'
         verbose_name = verbose_name_plural = '商品信息'

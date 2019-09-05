@@ -33,7 +33,7 @@
                         <img src="/m/{{ activegoods.goods.img1 }}">
                     </dt>
                     <dd>
-                        {{  activegoods.goods.name }}
+                        {{  activegoods.goods.short_title }}
                     </dd>
                     <dd>
 
@@ -43,7 +43,7 @@
 
                     </dd>
                     <dd>
-                        <button class="btn btn-danger">抢购</button>
+                        <button class="btn btn-danger" onclick="qbuy(this, '{{ activegoods.goods.id }}')">抢购</button>
                     </dd>
                 </dl>
             </li>
@@ -51,4 +51,40 @@
         
     </ul>
     
+{% endblock %}
+
+{% block js %}
+    <script>
+        var cId = 0;
+        function qbuy(btn, goods_id) {
+            fetch('/active/qbuy/'+goods_id+"/")
+                .then(resp=>resp.json())
+                .then(data=>{
+                    if(data.code == 100){
+                        if(confirm('当前用户未登录，是否进入登录页面')){
+                            open('/user/login/', target='_self');
+                        }
+                        return
+                    }
+
+                 $(btn).text(data.msg);
+                 if(data.code == 201){
+                     cId = setInterval(function () {
+
+                         fetch('/active/query_qbuy/'+goods_id+"/")
+                             .then(resp=>resp.json())
+                             .then(data=>{
+                                 $(btn).text(data.msg);
+                                 if(data.code != 201){
+                                     clearInterval(cId);
+                                 }
+                             })
+
+                     }, 1000);
+                 }
+            })
+        }
+
+    </script>
+
 {% endblock %}
