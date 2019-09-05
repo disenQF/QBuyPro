@@ -8,6 +8,7 @@ from libs import cache
 @shared_task
 def qbuy_task(user_id, goods_id):
     time.sleep(10)
+
     # 判断是否已抢完
     if cache.is_qbuyable():
         # 判断当前用户是否已抢过

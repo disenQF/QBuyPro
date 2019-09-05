@@ -11,6 +11,7 @@ def is_qbuyable():
 
 
 def exist_qbuy(user_id):
+
     # 验证用户是否已抢购
     return rd_client.hexists(QBUY_KEY, user_id)
 

@@ -5,7 +5,7 @@ from redis import Redis
 config = {
     'host': '119.3.170.97',
     'port': 6378,
-    'db': '9',
+    'db': 9,
     'decode_responses': True
 }
 
