@@ -39,6 +39,10 @@ class ActiveGoodsModel(models.Model):
     rate = models.FloatField(verbose_name='折扣率',
                              default=.88)
 
+    @property
+    def rate_price(self):
+        return float(self.goods.price)*self.rate
+
     def __str__(self):
         return self.active.title + ":" + self.goods.name
 

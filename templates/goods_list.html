@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block css %}
+    <style>
+        ul, li{
+            list-style: none;
+        }
+        li{
+            float: left;
+            margin: 5px;
+        }
+        .price {
+            text-decoration: line-through;
+            color: lightgray;
+        }
+
+        .vip_price{
+            color: blue;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+
+    <h3>{{ active.title }}</h3>
+    <p>
+        <img src="/m/{{ active.img1 }}">
+    </p>
+    
+    <ul>
+        {% for activegoods in active.activies.all %}
+            <li>
+                <dl>
+                    <dt>
+                        <img src="/m/{{ activegoods.goods.img1 }}">
+                    </dt>
+                    <dd>
+                        {{  activegoods.goods.name }}
+                    </dd>
+                    <dd>
+
+                        ￥：
+                        <span class="vip_price">{{  activegoods.rate_price }}</span>
+                        <span class="price">{{  activegoods.goods.price }}</span>
+
+                    </dd>
+                    <dd>
+                        <button class="btn btn-danger">抢购</button>
+                    </dd>
+                </dl>
+            </li>
+        {% endfor %}
+        
+    </ul>
+    
+{% endblock %}
