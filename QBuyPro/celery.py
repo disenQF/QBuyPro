@@ -9,8 +9,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'QBuyPro.settings')
 
 app = Celery('QBuyPro',
-             broker='redis://localhost:6379/3',
-             backend='redis://localhost:6379/4',
+             broker='redis://119.3.170.97:6378/3',
+             backend='redis://119.3.170.97:6378/4',
              namespace='Celery')
 
 app.config_from_object('django.conf:settings')

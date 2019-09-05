@@ -11,7 +11,6 @@ class GoodsModel(models.Model):
     img1 = models.ImageField(verbose_name='图片1',
                              upload_to='goods')
 
-
     def __str__(self):
         return self.name
 

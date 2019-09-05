@@ -64,8 +64,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'qbuydb',
-        'HOST': '10.36.174.12',
-        'PORT': 3306,
+        'HOST': '119.3.170.97',
+        'PORT': 3307,
         'USER': 'root',
         'PASSWORD': 'root',
         'CHARSET': 'utf8'
@@ -119,7 +119,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://localhost:6379/2'
+        'LOCATION': 'redis://119.3.170.97:6378/2'
     }
 }
 
