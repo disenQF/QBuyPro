@@ -3,13 +3,16 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import View
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
+
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 
 from .models import UserModel
 
-from rest_framework.decorators import api_view
 
 from api.user import UserModelSerializer
 
@@ -41,6 +44,11 @@ class LoginView(View):
 
 
 class UserAPIView(APIView):
+
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+
     def get(self, request):
         datas = UserModel.objects.all()
         serializer = UserModelSerializer(datas, many=True)
@@ -48,6 +56,8 @@ class UserAPIView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+
+
         serializer = UserModelSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -103,3 +113,7 @@ def user_api_detail(request, pk):
     if method == 'DELETE':
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class LoginApiView(APIView):
+    pass
